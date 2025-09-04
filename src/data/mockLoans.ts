@@ -1,0 +1,90 @@
+import { LoanPlan } from "@/components/LoanCard";
+
+export const mockLoanPlans: LoanPlan[] = [
+  {
+    id: "1",
+    lenderName: "TechCredit Bank",
+    lenderType: "bank",
+    title: "Personal Loan Pro",
+    description: "Low-rate personal loans for qualified borrowers with excellent credit history.",
+    interestRate: 4.99,
+    minAmount: 5000,
+    maxAmount: 50000,
+    termMonths: [12, 24, 36, 48, 60],
+    creditScoreMin: 720,
+    processingTime: "24-48 hours",
+    features: ["No origination fees", "Early payoff discount", "Rate lock guarantee"],
+    isPopular: true
+  },
+  {
+    id: "2",
+    lenderName: "Community First Credit Union",
+    lenderType: "credit_union",
+    title: "Flexible Personal Loan",
+    description: "Member-focused personal loans with competitive rates and flexible terms.",
+    interestRate: 6.25,
+    minAmount: 2500,
+    maxAmount: 35000,
+    termMonths: [12, 24, 36, 48],
+    creditScoreMin: 650,
+    processingTime: "2-3 business days",
+    features: ["Member benefits", "Local service", "Payment flexibility"]
+  },
+  {
+    id: "3",
+    lenderName: "QuickLend Online",
+    lenderType: "online",
+    title: "Fast Cash Loan",
+    description: "Quick online approvals for urgent financial needs with same-day funding.",
+    interestRate: 8.99,
+    minAmount: 1000,
+    maxAmount: 25000,
+    termMonths: [6, 12, 24, 36],
+    creditScoreMin: 580,
+    processingTime: "Same day",
+    features: ["Instant approval", "Same-day funding", "Mobile app"],
+    isPopular: false
+  },
+  {
+    id: "4",
+    lenderName: "PeerLend Network",
+    lenderType: "peer_to_peer",
+    title: "Investor-Funded Loan",
+    description: "Peer-to-peer lending platform connecting borrowers with individual investors.",
+    interestRate: 7.49,
+    minAmount: 3000,
+    maxAmount: 40000,
+    termMonths: [24, 36, 48, 60],
+    creditScoreMin: 640,
+    processingTime: "3-5 business days",
+    features: ["Competitive rates", "Investor matching", "Transparent process"]
+  },
+  {
+    id: "5",
+    lenderName: "SecureBank Plus",
+    lenderType: "bank",
+    title: "Premium Personal Credit",
+    description: "Premium personal loans for high-income professionals and executives.",
+    interestRate: 5.49,
+    minAmount: 10000,
+    maxAmount: 100000,
+    termMonths: [12, 24, 36, 48, 60, 72],
+    creditScoreMin: 750,
+    processingTime: "1-2 business days",
+    features: ["Concierge service", "No fees", "Premium rewards"]
+  },
+  {
+    id: "6",
+    lenderName: "StartupLend",
+    lenderType: "online",
+    title: "Business Builder Loan",
+    description: "Specialized loans for entrepreneurs and small business owners looking to expand.",
+    interestRate: 9.99,
+    minAmount: 5000,
+    maxAmount: 75000,
+    termMonths: [12, 24, 36, 48],
+    creditScoreMin: 600,
+    processingTime: "2-4 business days",
+    features: ["Business focused", "Mentorship program", "Flexible collateral"]
+  }
+];
