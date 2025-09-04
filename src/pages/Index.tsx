@@ -22,8 +22,11 @@ const Index = () => {
               <Button variant="ghost" asChild>
                 <Link to="/marketplace">Browse Loans</Link>
               </Button>
+              <Button variant="ghost" asChild>
+                <Link to="/login">Sign In</Link>
+              </Button>
               <Button variant="outline" asChild>
-                <Link to="/lender">Lender Portal</Link>
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
           </div>
