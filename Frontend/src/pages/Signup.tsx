@@ -9,6 +9,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -23,7 +24,7 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
@@ -34,13 +35,44 @@ const Signup = () => {
     // TODO: Connect to your backend registration
     console.log("Signup attempt:", formData);
     
-    // For now, simulate signup success and redirect based on role
-    if (formData.role === "lender") {
-      navigate("/lender");
-    } else {
-      navigate("/marketplace");
+    const formData2 = new FormData();
+    formData2.append("FirstName", formData.firstName);
+    formData2.append("LastName", formData.lastName);
+    formData2.append("Email", formData.email);
+    formData2.append("PhoneNumber", formData.phoneNumber);
+    formData2.append("Password", formData.password);
+    if(formData.role === "borrower") {
+        const response = await fetch("https://localhost:7008/api/Borrowers/AddBorrower", {
+        method: "POST",
+        body: formData2,
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log(data);
+      if(!response.ok) {
+        alert(JSON.stringify(data, null, 2));
+      }else{
+        alert("User registered successfully");
+        navigate("/marketplace");
+      }
+    }
+    else {
+        const response = await fetch("https://localhost:7008/api/Lenders/AddLender", {
+        method: "POST",
+        body: formData2,
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log(data);
+      if(!response.ok) {
+        alert(JSON.stringify(data, null, 2));
+      }else{
+        alert("Lender registered successfully");
+        navigate("/lender");
+      }
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5 flex items-center justify-center p-4">
@@ -71,6 +103,18 @@ const Signup = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   placeholder="Doe"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  placeholder="(123) 456-7890"
                   required
                 />
               </div>
