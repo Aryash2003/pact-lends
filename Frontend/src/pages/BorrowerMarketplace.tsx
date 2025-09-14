@@ -18,8 +18,7 @@ export default function BorrowerMarketplace() {
     maxRate: [15],
     minAmount: "",
     maxAmount: "",
-    lenderType: "all",
-    minCreditScore: [500]
+    lenderType: "all"
   });
 
   const filteredLoans = mockLoanPlans.filter(loan => {
@@ -31,9 +30,7 @@ export default function BorrowerMarketplace() {
     const matchesType = filters.lenderType === "all" || loan.lenderType === filters.lenderType;
     const matchesMinAmount = !filters.minAmount || loan.minAmount >= parseInt(filters.minAmount);
     const matchesMaxAmount = !filters.maxAmount || loan.maxAmount <= parseInt(filters.maxAmount);
-    const matchesCreditScore = loan.creditScoreMin <= filters.minCreditScore[0];
-
-    return matchesSearch && matchesRate && matchesType && matchesMinAmount && matchesMaxAmount && matchesCreditScore;
+    return matchesSearch && matchesRate && matchesType && matchesMinAmount && matchesMaxAmount;
   });
 
   const handleApply = (loanId: string) => {
@@ -83,7 +80,7 @@ export default function BorrowerMarketplace() {
             </div>
 
             {/* Filters */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <Label className="text-sm font-medium">Max Interest Rate</Label>
                 <div className="mt-2">
@@ -141,24 +138,6 @@ export default function BorrowerMarketplace() {
                 />
               </div>
 
-              <div>
-                <Label className="text-sm font-medium">Your Credit Score</Label>
-                <div className="mt-2">
-                  <Slider
-                    value={filters.minCreditScore}
-                    onValueChange={(value) => setFilters({ ...filters, minCreditScore: value })}
-                    max={850}
-                    min={300}
-                    step={10}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>300</span>
-                    <span className="font-medium">{filters.minCreditScore[0]}</span>
-                    <span>850</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <Button 
@@ -168,8 +147,7 @@ export default function BorrowerMarketplace() {
                 maxRate: [15],
                 minAmount: "",
                 maxAmount: "",
-                lenderType: "all",
-                minCreditScore: [500]
+                lenderType: "all"
               })}
             >
               Reset Filters
@@ -204,8 +182,7 @@ export default function BorrowerMarketplace() {
                 maxRate: [15],
                 minAmount: "",
                 maxAmount: "",
-                lenderType: "all",
-                minCreditScore: [500]
+                lenderType: "all"
               })}
             >
               Clear All Filters
