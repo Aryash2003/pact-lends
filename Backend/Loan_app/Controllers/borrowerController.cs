@@ -29,13 +29,24 @@ namespace Loan_app.Controllers
 
             return Ok(new { message = "Login successful", borrowerId = borrower.Id });
         }
-
+        [HttpPost("Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("BorrowerId");
+            return Ok(new { message = "Logout successful" });
+        }
         // Add a new borrower (form-data or JSON)
         [HttpPost("AddBorrower")]
         public async Task<ActionResult<borrower>> AddBorrower([FromForm] borrower borrower)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            var existingBorrower = await _context.borrowers.FirstOrDefaultAsync(b => b.Email == borrower.Email);
+
+            if (existingBorrower != null)
+            {
+                return Conflict(new { message = "Email already exists. Please use a different email." });
+            }
 
             _context.borrowers.Add(borrower);
             await _context.SaveChangesAsync();
@@ -78,6 +89,30 @@ namespace Loan_app.Controllers
 
             await _context.SaveChangesAsync();
             return Ok(borrower);
+        }
+        [HttpPost("Loan_request")]
+        public async Task<IActionResult> Loan_request( [FromForm] int amount, [FromForm] string FirstName, [FromForm] string LastName, [FromForm]
+        DateTime dob,[FromForm] string Company, [FromForm] string employment_status, [FromForm] int income, [FromForm] string job_title)
+        {
+            var borrowerId = HttpContext.Session.GetInt32("BorrowerId");
+            if (!borrowerId.HasValue)
+                return Unauthorized("Please log in as a borrower to request a loan.");
+            var request = new Request
+            {
+                firstName = FirstName,
+                lastName = LastName,
+                dob = dob,
+                employment_status = employment_status,
+                job_title = job_title, 
+                company_name=Company,
+                monthly_income = income,
+                Borrower_id = borrowerId.Value,
+                Amount = amount,
+                Status = "Pending"
+            };
+            _context.Requests.Add(request);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Loan request submitted"});
         }
 
     }

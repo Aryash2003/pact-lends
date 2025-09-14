@@ -98,6 +98,57 @@
   },
   {
     "ContainingType": "Loan_app.Controllers.BorrowersController",
+    "Method": "Loan_request",
+    "RelativePath": "api/Borrowers/Loan_request",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "amount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dob",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Company",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employment_status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "income",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "job_title",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.BorrowersController",
     "Method": "Login",
     "RelativePath": "api/Borrowers/Login",
     "HttpMethod": "POST",
@@ -115,6 +166,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.BorrowersController",
+    "Method": "Logout",
+    "RelativePath": "api/Borrowers/Logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -162,6 +223,47 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "Add_plan",
+    "RelativePath": "api/Lender/Add_plan",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "interestRate",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "duration",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "amount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Loan_app.Models.Entities.Plans",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Loan_app.Controllers.LenderController",
@@ -233,5 +335,67 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "GetPlans",
+    "RelativePath": "api/Lender/GetPlans",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Loan_app.Models.Entities.Plans, Loan_app, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "Login",
+    "RelativePath": "api/Lender/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "StatusUpdate",
+    "RelativePath": "api/Lender/StatusUpdate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

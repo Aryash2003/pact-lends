@@ -11,6 +11,6 @@ namespace Loan_app.Data
         public DbSet<borrower> borrowers { get; set; }
         public DbSet<Lender> Lenders { get; set; }
         public DbSet<Plans> Plans { get; set; }
-        public DbSet<Loans> Loans { get; set; }
+        public DbSet<Request> Requests { get; set; }
     }
 }

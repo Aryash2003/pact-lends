@@ -14,7 +14,7 @@ namespace Loan_app.Models.Entities
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
-        public String Password { get; set; }    
+        public string Password { get; set; }    
 
     }
 }

@@ -2,7 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:8080") // 👈 your frontend URL
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); // 👈 needed if using cookies/session
+        });
+});
 // Add services to the container
 builder.Services.AddControllers(); // ✅ For Web API only
 
@@ -34,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseCors("AllowFrontend");
 
 // 👇 Add this
 app.UseSession();
