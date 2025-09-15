@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loan_app.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250914185726_Final")]
-    partial class Final
+    [Migration("20250915221310_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,9 +134,12 @@ namespace Loan_app.Migrations
                     b.Property<int>("monthly_income")
                         .HasColumnType("int");
 
+                    b.Property<int>("plan_id")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Request");
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("Loan_app.Models.Entities.borrower", b =>

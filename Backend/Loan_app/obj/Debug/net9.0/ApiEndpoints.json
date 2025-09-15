@@ -78,6 +78,26 @@
   },
   {
     "ContainingType": "Loan_app.Controllers.BorrowersController",
+    "Method": "GetAllPlans",
+    "RelativePath": "api/Borrowers/GetAllPlans",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Loan_app.Models.Entities.Plans, Loan_app, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.BorrowersController",
     "Method": "GetBorrowers",
     "RelativePath": "api/Borrowers/GetBorrowers",
     "HttpMethod": "GET",
@@ -104,6 +124,11 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "request_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
       {
         "Name": "amount",
         "Type": "System.Int32",
@@ -358,6 +383,26 @@
   },
   {
     "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "GetRequests",
+    "RelativePath": "api/Lender/GetRequests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Loan_app.Models.Entities.Request, Loan_app, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
     "Method": "Login",
     "RelativePath": "api/Lender/login",
     "HttpMethod": "POST",
@@ -375,6 +420,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "Logout",
+    "RelativePath": "api/Lender/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

@@ -90,8 +90,13 @@ namespace Loan_app.Controllers
             await _context.SaveChangesAsync();
             return Ok(borrower);
         }
+        [HttpGet("GetAllPlans")]
+        public async Task<ActionResult<IEnumerable<Plans>>> GetAllPlans()
+        {
+            return await _context.Plans.ToListAsync();
+        }
         [HttpPost("Loan_request")]
-        public async Task<IActionResult> Loan_request( [FromForm] int amount, [FromForm] string FirstName, [FromForm] string LastName, [FromForm]
+        public async Task<IActionResult> Loan_request([FromForm] int request_id, [FromForm] int amount, [FromForm] string FirstName, [FromForm] string LastName, [FromForm]
         DateTime dob,[FromForm] string Company, [FromForm] string employment_status, [FromForm] int income, [FromForm] string job_title)
         {
             var borrowerId = HttpContext.Session.GetInt32("BorrowerId");
@@ -99,6 +104,7 @@ namespace Loan_app.Controllers
                 return Unauthorized("Please log in as a borrower to request a loan.");
             var request = new Request
             {
+                plan_id = request_id,
                 firstName = FirstName,
                 lastName = LastName,
                 dob = dob,

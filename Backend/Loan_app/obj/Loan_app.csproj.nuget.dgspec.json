@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\.NET-Projects\\Loan_app\\Loan_app.csproj": {}
+    "D:\\pact-lends\\Backend\\Loan_app\\Loan_app.csproj": {}
   },
   "projects": {
-    "D:\\.NET-Projects\\Loan_app\\Loan_app.csproj": {
+    "D:\\pact-lends\\Backend\\Loan_app\\Loan_app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\.NET-Projects\\Loan_app\\Loan_app.csproj",
+        "projectUniqueName": "D:\\pact-lends\\Backend\\Loan_app\\Loan_app.csproj",
         "projectName": "Loan_app",
-        "projectPath": "D:\\.NET-Projects\\Loan_app\\Loan_app.csproj",
+        "projectPath": "D:\\pact-lends\\Backend\\Loan_app\\Loan_app.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\.NET-Projects\\Loan_app\\obj\\",
+        "outputPath": "D:\\pact-lends\\Backend\\Loan_app\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

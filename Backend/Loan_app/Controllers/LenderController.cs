@@ -42,6 +42,12 @@ namespace Loan_app.Controllers
             HttpContext.Session.SetInt32("LenderId", lender.Id);
             return Ok(new { message = "Login successful", lenderId = lender.Id });
         }
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("LenderId");
+            return Ok(new { message = "Logout successful" });
+        }
         [HttpGet("GetLenders")]
         public async Task<ActionResult<IEnumerable<Lender>>> GetLender()
         {
@@ -84,6 +90,31 @@ namespace Loan_app.Controllers
             request.Status = status;
             await _context.SaveChangesAsync();
             return Ok(new { message = "Request status updated successfully." });
+        }
+        [HttpGet("GetRequests")]
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
+        {
+            var lenderId = HttpContext.Session.GetInt32("LenderId");
+            if (!lenderId.HasValue)
+                return Unauthorized("Please log in as a lender to view requests.");
+            var requests = await _context.Requests
+                .Where(r => r.plan_id != 0 && _context.Plans.Any(p => p.Id == r.plan_id && p.Lender_id == lenderId.Value))
+                .ToListAsync();
+            return requests;
+        }
+        public async Task<IActionResult> EditPlan([FromForm] int id,[FromForm] string Title,[FromForm] int amount,[FromForm] int interest,[FromForm] int Duration)
+        {
+            var plan = await _context.Plans.FindAsync(id);
+            if (plan == null)
+                return NotFound("Plan not found");
+
+            plan.title = Title;
+            plan.maxLoanAmount = amount;
+            plan.interestRate = interest;
+            plan.durationInMonths = Duration;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Plan updated successfully", plan });
         }
     }
 }

@@ -2,37 +2,41 @@
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 🔹 Configure CORS for React
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:8080") // 👈 your frontend URL
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials(); // 👈 needed if using cookies/session
-        });
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") // 👈 Use HTTPS for React dev server
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // 👈 Required for cookies/session
+    });
 });
-// Add services to the container
-builder.Services.AddControllers(); // ✅ For Web API only
 
-// Configure EF Core with SQL Server
+// 🔹 Add services
+builder.Services.AddControllers();
+
+// 🔹 EF Core with SQL Server
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDistributedMemoryCache(); // for storing session in memory
+// 🔹 Session setup
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // session timeout
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.SameSite = SameSiteMode.None;              // ✅ allow cross-site cookies
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;  // ✅ cookie only works over HTTPS
 });
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// 🔹 Middleware order matters!
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -43,14 +47,11 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseCors("AllowFrontend"); // ✅ must be before Session/Auth
+app.UseSession();             // ✅ enables session
+
 app.UseAuthorization();
 
-app.UseCors("AllowFrontend");
-
-// 👇 Add this
-app.UseSession();
-
-// ✅ Map API controllers
 app.MapControllers();
 
 app.Run();

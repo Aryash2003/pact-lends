@@ -6,6 +6,8 @@ namespace Loan_app.Models.Entities
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public int plan_id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public DateTime dob { get; set; }

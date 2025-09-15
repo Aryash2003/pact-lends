@@ -131,6 +131,9 @@ namespace Loan_app.Migrations
                     b.Property<int>("monthly_income")
                         .HasColumnType("int");
 
+                    b.Property<int>("plan_id")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Requests");
