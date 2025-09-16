@@ -46,7 +46,7 @@ namespace Loan_app.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("LenderId");
-            return Ok(new { message = "Logout successful" });
+            return Ok(new { message = "Logout successful" });   
         }
         [HttpGet("GetLenders")]
         public async Task<ActionResult<IEnumerable<Lender>>> GetLender()
@@ -102,6 +102,7 @@ namespace Loan_app.Controllers
                 .ToListAsync();
             return requests;
         }
+        [HttpPut("EditPlan")]
         public async Task<IActionResult> EditPlan([FromForm] int id,[FromForm] string Title,[FromForm] int amount,[FromForm] int interest,[FromForm] int Duration)
         {
             var plan = await _context.Plans.FindAsync(id);

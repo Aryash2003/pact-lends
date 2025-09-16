@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import api from "../api/axiosconfig";
 import Modal from "../components/Modal";
 
@@ -44,7 +44,7 @@ export default function LenderDashboard() {
       const formData = new FormData();
       formData.append("title", newPlan.Title);
       formData.append("interestRate", newPlan.InterestRate);
-      formData.append("durationInMonths", newPlan.DurationInMonths);
+      formData.append("duration", newPlan.DurationInMonths); // ✅ backend expects "duration"
       formData.append("amount", newPlan.MaxAmount);
 
       await api.post("/Lender/Add_plan", formData, {
@@ -73,7 +73,7 @@ export default function LenderDashboard() {
       formData.append("interest", editPlan.InterestRate);
       formData.append("Duration", editPlan.DurationInMonths);
 
-      await api.post("/Lender/EditPlan", formData, {
+      await api.put("/Lender/EditPlan", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
@@ -135,7 +135,8 @@ export default function LenderDashboard() {
               className="border p-3 rounded-xl mb-2 flex justify-between items-center"
             >
               <span>
-                {p.title} - {p.interestRate}% for {p.durationInMonths} months (Max: {p.amount})
+                {p.title} - {p.interestRate}% for {p.durationInMonths} months{" "}
+                (Max: {p.maxLoanAmount})
               </span>
               <button
                 className="bg-yellow-500 text-white px-3 py-1 rounded-xl"
@@ -145,7 +146,7 @@ export default function LenderDashboard() {
                     Title: p.title,
                     InterestRate: p.interestRate,
                     DurationInMonths: p.durationInMonths,
-                    MaxAmount: p.amount
+                    MaxAmount: p.maxLoanAmount
                   });
                   setOpenEdit(true);
                 }}
