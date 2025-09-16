@@ -1,0 +1,16 @@
+/* src/index.css */
+
+/* 1. Tailwind’s base styles (like normalize.css) */
+@tailwind base;
+
+/* 2. Tailwind’s utility classes (margin, padding, text, etc.) */
+@tailwind components;
+
+/* 3. Tailwind’s responsive/utilities classes (hover, focus, media queries) */
+@tailwind utilities;
+
+/* Optional: your custom global styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f7fa;
+}

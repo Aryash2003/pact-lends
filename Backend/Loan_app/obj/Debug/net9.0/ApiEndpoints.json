@@ -251,6 +251,42 @@
   },
   {
     "ContainingType": "Loan_app.Controllers.LenderController",
+    "Method": "EditPlan",
+    "RelativePath": "api/Lender",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "amount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "interest",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Duration",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Loan_app.Controllers.LenderController",
     "Method": "Add_plan",
     "RelativePath": "api/Lender/Add_plan",
     "HttpMethod": "POST",
